@@ -1,16 +1,26 @@
 import dotenv from "dotenv"
 import express from "express"
-
-// Load environment variables from .env file
-dotenv.config()
+import cors from "cors"
+import bodyParser from "body-parser"
+import LeetCodeRoutes from "./Routes/LeetCode.Routes"
+import GitHubRoutes from "./Routes/GitHub.Routes"
 
 // Create an Express application
 const app = express()
+
+// Load environment variables from .env file
+dotenv.config()
+app.use(cors())
+app.use(bodyParser.json())
 
 // Define a route
 app.get("/", (req, res) => {
   res.send("Hello, world!")
 })
+
+// Import the routes
+app.use("/leetcode", LeetCodeRoutes)
+app.use("/github", GitHubRoutes)
 
 // Start the server
 const PORT = process.env.PORT || 5050
