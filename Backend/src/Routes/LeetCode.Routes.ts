@@ -5,10 +5,10 @@ const router = express.Router()
 
 // LeetCode Routes
 
-// GET /leetcode/profile
+// POST /leetcode/profile
 router.post("/profile", LeetCodeController.Profile)
 
-// GET /leetcode/calendar
+// POST /leetcode/calendar
 router.post("/calendar", LeetCodeController.Calendar)
 
 export default router
