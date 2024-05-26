@@ -71,7 +71,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"userName\": \"romanLetodiani\"\r\n}",
+					"raw": "{\r\n    \"userName\": \"romaLetodiani\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
