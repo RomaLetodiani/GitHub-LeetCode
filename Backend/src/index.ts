@@ -13,11 +13,6 @@ dotenv.config()
 app.use(cors())
 app.use(bodyParser.json())
 
-// Define a route
-app.get("/", (req, res) => {
-  res.send("Hello, world!")
-})
-
 // Import the routes
 app.use("/leetcode", LeetCodeRoutes)
 app.use("/github", GitHubRoutes)

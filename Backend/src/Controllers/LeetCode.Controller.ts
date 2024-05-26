@@ -15,6 +15,10 @@ class LeetCodeController {
 
     try {
       const profile = await this.LeetCodeServices.getProfile(userName)
+      if (!profile) {
+        throw new Error("User not found")
+      }
+
       return res.status(200).json(profile)
     } catch (error) {
       if (error instanceof Error) {
@@ -24,15 +28,19 @@ class LeetCodeController {
     }
   }
 
-  public Calendar = (req: Request, res: Response) => {
-    const { userName } = req.body
+  public Calendar = async (req: Request, res: Response) => {
+    const { userName, year } = req.body
 
     if (!userName) {
       return res.status(400).json({ message: "Please provide a valid username" })
     }
 
+    if (year && typeof year !== "number") {
+      return res.status(400).json({ message: "Please provide a valid year" })
+    }
+
     try {
-      const calendar = this.LeetCodeServices.getCalendar(userName)
+      const calendar = await this.LeetCodeServices.getCalendar(userName, year)
       return res.status(200).json(calendar)
     } catch (error) {
       if (error instanceof Error) {

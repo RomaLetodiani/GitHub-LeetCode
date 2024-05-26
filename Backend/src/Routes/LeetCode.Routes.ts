@@ -6,9 +6,9 @@ const router = express.Router()
 // LeetCode Routes
 
 // GET /leetcode/profile
-router.post("/profile", (req, res) => LeetCodeController.Profile)
+router.post("/profile", LeetCodeController.Profile)
 
 // GET /leetcode/calendar
-router.post("/calendar", (req, res) => LeetCodeController.Calendar)
+router.post("/calendar", LeetCodeController.Calendar)
 
 export default router
