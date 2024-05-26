@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "97ba18cd-9610-4e25-a106-74918f489dfb",
+		"name": "GitHub-LeetCode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31975327"
+	},
+	"item": [
+		{
+			"name": "LeetCode Profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"romanLetodiani\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/leetcode/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"leetcode",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitHub Calendar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"romaLetodiani\",\r\n    \"year\": 2025\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/github/calendar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"github",
+						"calendar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GitHub Profile",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"romanLetodiani\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/github/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"github",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LeetCode Calendar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"userName\": \"romanletodiani\", \"year\":2024}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/leetcode/calendar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"leetcode",
+						"calendar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
