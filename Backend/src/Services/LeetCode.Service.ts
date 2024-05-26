@@ -3,7 +3,7 @@ import axios from "axios"
 class LeetCodeServices {
   public getProfile = async (userName: string) => {
     const query = `
-      query getUserProfile($userName: String!) {
+      query ($userName: String!) {
         matchedUser(username: $userName) {
           username
           githubUrl
@@ -40,12 +40,15 @@ class LeetCodeServices {
       return data
     } catch (error) {
       console.error("🚀 ~ LeetCodeServices ~ getProfile ~ error:", error)
+      if (error instanceof Error) {
+        throw new Error(error.message)
+      }
       throw new Error("An unexpected error occurred")
     }
   }
 
   public getCalendar = async (userName: string, year: number = 2024) => {
-    const query = `query getUserProfile($userName: String!, $year: Int!) {
+    const query = `query ($userName: String!, $year: Int!) {
       matchedUser(username: $userName) {
         userCalendar(year: $year) {
           activeYears
