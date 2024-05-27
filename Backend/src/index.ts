@@ -13,6 +13,11 @@ dotenv.config()
 app.use(cors())
 app.use(bodyParser.json())
 
+// Define the default route
+app.get("/", (req, res) => {
+  res.send("Welcome to the backend server")
+})
+
 // Import the routes
 app.use("/leetcode", LeetCodeRoutes)
 app.use("/github", GitHubRoutes)
