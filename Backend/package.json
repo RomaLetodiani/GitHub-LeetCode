@@ -4,11 +4,18 @@
   "description": "Node Express TypeScript Boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "build": "tsc",
-    "dev": "nodemon src/index.ts",
-    "test": "jest"
+    "start": "nodemon src/index.ts",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "vercel"
   },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+  ],
   "repository": "https://github.com/RomaLetodiani/Node-Express-TypeScript-BoilerPlate",
   "keywords": [
     "Node",
