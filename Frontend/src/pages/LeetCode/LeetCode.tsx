@@ -1,50 +1,20 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { useInput } from '../../hooks/useInput'
-import Input from '../../components/UI/Input'
-import Button from '../../components/UI/Button'
-import { leetCodeServices } from '../../services'
-
-const fetchLeetCodeProfile = async (userName: string) => {
-  if (userName) {
-    // Check if username is not empty
-    return await leetCodeServices.getProfile({ userName }).then(({ data }) => {
-      return data
-    })
-  }
-}
+import Avatar from '../../components/Avatar'
+import { useDataQuery } from '../../hooks/useDataQuery'
 
 const LeetCode = () => {
-  const userNameInput = useInput((value) => value.length > 0)
-  const queryClient = useQueryClient()
+  const profileData = useDataQuery()
 
-  const {
-    mutate: fetchProfile,
-    isPending: isLoadingProfile,
-    error: errorProfile,
-    data: profile,
-  } = useMutation({
-    mutationFn: fetchLeetCodeProfile,
-    onSuccess: (data) => {
-      queryClient.setQueryData(['profile', userNameInput.value], data)
-    },
-  })
-
-  const handleSearch = () => {
-    fetchProfile(userNameInput.value)
-  }
-
+  if (profileData.isLoading) return <div>Loading...</div>
+  if (profileData.isError) return <div>Error...</div>
   return (
     <div>
-      <Input placeholder="Leetcode Username" {...userNameInput} />
-      <Button onClick={handleSearch}>Search</Button>
-      {isLoadingProfile && <p>Loading...</p>}
-      {errorProfile && <p>An error occurred: {errorProfile.message}</p>}
-      {profile && (
-        <div>
-          <h3>Profile Data:</h3>
-          <p>{profile.username}</p>
-        </div>
-      )}
+      <Avatar
+        className="w-32 h-32 rounded-full"
+        url={profileData.profile.userAvatar}
+        alt="leetCode Avatar Profile"
+        desc={profileData.profile.aboutMe}
+        userName={profileData.userName}
+      />
     </div>
   )
 }
