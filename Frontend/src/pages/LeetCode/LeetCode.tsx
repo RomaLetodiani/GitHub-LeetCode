@@ -42,7 +42,7 @@ const LeetCode = () => {
       {profile && (
         <div>
           <h3>Profile Data:</h3>
-          <p>{profile?.matchedUser?.username}</p>
+          <p>{profile.username}</p>
         </div>
       )}
     </div>
