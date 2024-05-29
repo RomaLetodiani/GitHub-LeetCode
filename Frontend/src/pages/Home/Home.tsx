@@ -14,7 +14,7 @@ const transitionVariants = (dimensions: { height: number; width: number }) => ({
     },
   },
   closed: {
-    clipPath: `circle(30px at ${dimensions.width / 2}px ${dimensions.height / 2}px)`,
+    clipPath: `circle(0px at ${dimensions.width / 2}px ${dimensions.height / 2}px)`,
     transition: {
       delay: 0.2,
       type: 'spring',
