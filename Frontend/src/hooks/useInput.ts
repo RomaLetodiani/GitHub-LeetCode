@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
 /**
@@ -23,8 +24,12 @@ type InputState = {
  * @param validate A function to validate the input value.
  * @returns An object containing input state and event handlers.
  */
-export const useInput = (validate: (value: string) => boolean): InputState => {
-  const [value, setValue] = useState<string>('')
+export const useInput = (
+  validate: (value: string) => boolean,
+  queryKeys: string[] = ['input'],
+): InputState => {
+  const queryClient = useQueryClient()
+  const [value, setValue] = useState<string>('romaletodiani')
   const [touched, setTouched] = useState<boolean>(false)
   const [focus, setFocus] = useState<boolean>(false)
 
@@ -46,6 +51,7 @@ export const useInput = (validate: (value: string) => boolean): InputState => {
 
   useEffect(() => {
     value && setFocus(true)
+    queryClient.setQueryData(queryKeys, value)
   }, [value])
 
   return {

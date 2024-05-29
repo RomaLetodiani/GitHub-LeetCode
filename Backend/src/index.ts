@@ -14,7 +14,6 @@ app.use(cors())
 app.use(bodyParser.json())
 
 // TODO: Add a middleware to log all the incoming requests
-// TODO: Deploy Code on Vercel
 
 // Define the default route
 app.get("/", (req, res) => {
