@@ -37,7 +37,7 @@ class LeetCodeServices {
         throw new Error(response.data.errors[0].message || "An unexpected error occurred")
       }
       const { data } = response
-      return data
+      return data.data.matchedUser
     } catch (error) {
       console.error("🚀 ~ LeetCodeServices ~ getProfile ~ error:", error)
       if (error instanceof Error) {
@@ -83,8 +83,7 @@ class LeetCodeServices {
         throw new Error(response.data.errors[0].message || "An unexpected error occurred")
       }
       const { data } = response
-      console.log("🚀 ~ LeetCodeServices ~ getCalendar= ~ data:", data)
-      return data
+      return data.data.matchedUser.userCalendar
     } catch (error) {
       console.error("🚀 ~ LeetCodeServices ~ getCalendar ~ error:", error)
       throw new Error("An unexpected error occurred")

@@ -33,7 +33,7 @@ class GitHubServices {
         throw new Error(response.data.errors[0].message || "An unexpected error occurred")
       }
       const { data } = response
-      return data
+      return data.data.user
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(error.message)
@@ -67,7 +67,7 @@ class GitHubServices {
         throw new Error(response.data.errors[0].message || "An unexpected error occurred")
       }
       const { data } = response
-      return data
+      return data.data.user
     } catch (error) {
       if (error instanceof Error) {
         throw new Error(error.message)
