@@ -3,6 +3,11 @@ import { motion } from 'framer-motion'
 import Card from '../../components/Card'
 import useWindowSize from '../../hooks/useWindowSize'
 import { useEffect } from 'react'
+import Input from '../../components/UI/Input'
+import { useInput } from '../../hooks/useInput'
+import Button from '../../components/UI/Button'
+import { gitHubServices, leetCodeServices } from '../../services'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 const transitionVariants = (dimensions: { height: number; width: number }) => ({
   open: {
     clipPath: `circle(${dimensions.height * 3}px at 0px 0px)`,
@@ -23,11 +28,37 @@ const transitionVariants = (dimensions: { height: number; width: number }) => ({
     },
   },
 })
+
+export const fetchProfileData = async (page: string, userName: string) => {
+  if (!userName) {
+    return
+  }
+  switch (page) {
+    case '/github':
+      return await gitHubServices.getProfile({ userName }).then(({ data }) => {
+        return data
+      })
+    case '/leetcode':
+      return await leetCodeServices.getProfile({ userName }).then(({ data }) => {
+        return data
+      })
+  }
+}
+
 const Home = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const isLeetCode = pathname.includes('leetcode')
   const dimensions = useWindowSize()
+  const userNameInput = useInput((value) => value.length > 0, ['userNameInput'])
+  const queryClient = useQueryClient()
+
+  const { mutate: fetchProfile } = useMutation({
+    mutationFn: () => fetchProfileData(pathname, userNameInput.value),
+    onSuccess: (data) => {
+      queryClient.setQueryData([`${pathname}-profile`, userNameInput.value], data)
+    },
+  })
   useEffect(() => {
     if (pathname === '/') {
       navigate('/github')
@@ -46,7 +77,9 @@ const Home = () => {
       />
 
       <Card>
+        <Input placeholder={`${isLeetCode ? 'LeetCode' : 'GitHub'} Username`} {...userNameInput} />
         <Outlet />
+        <Button onClick={() => fetchProfile()}>Search</Button>
       </Card>
     </motion.div>
   )
