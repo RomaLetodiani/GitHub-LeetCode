@@ -16,7 +16,6 @@ dotenv_1.default.config();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
 // TODO: Add a middleware to log all the incoming requests
-// TODO: Deploy Code on Vercel
 // Define the default route
 app.get("/", (req, res) => {
     res.send("Welcome to the backend server");
