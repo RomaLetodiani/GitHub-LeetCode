@@ -29,7 +29,13 @@ const transitionVariants = (dimensions: { height: number; width: number }) => ({
   },
 })
 
-export const fetchProfileData = async (page: string, userName: string) => {
+enum Page {
+  GITHUB = '/github',
+  LEETCODE = '/leetcode',
+}
+
+export const fetchProfileData = async (page: Page, userName: string) => {
+  console.log('🚀 ~ fetchProfileData ~ userName:', userName)
   if (!userName) {
     return
   }
@@ -54,7 +60,7 @@ const Home = () => {
   const queryClient = useQueryClient()
 
   const { mutate: fetchProfile } = useMutation({
-    mutationFn: () => fetchProfileData(pathname, userNameInput.value),
+    mutationFn: () => fetchProfileData(pathname as Page, userNameInput.value),
     onSuccess: (data) => {
       queryClient.setQueryData([`${pathname}-profile`, userNameInput.value], data)
     },
@@ -63,6 +69,12 @@ const Home = () => {
     if (pathname === '/') {
       navigate('/github')
     }
+    fetchProfileData(Page.GITHUB, userNameInput.value).then((data) => {
+      queryClient.setQueryData(['/github-profile', userNameInput.value], data)
+    })
+    fetchProfileData(Page.LEETCODE, userNameInput.value).then((data) => {
+      queryClient.setQueryData(['/leetcode-profile', userNameInput.value], data)
+    })
   }, [])
   return (
     <motion.div

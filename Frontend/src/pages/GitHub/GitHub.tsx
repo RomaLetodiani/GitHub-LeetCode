@@ -13,7 +13,7 @@ const GitHub = () => {
         url={profileData.avatarUrl}
         alt="GitHub Avatar Profile"
         desc={profileData.bio}
-        userName={profileData.userName}
+        userName={profileData.userName as string}
       />
     </div>
   )

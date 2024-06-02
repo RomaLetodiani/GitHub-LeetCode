@@ -3,6 +3,7 @@ import { useDataQuery } from '../../hooks/useDataQuery'
 
 const LeetCode = () => {
   const profileData = useDataQuery()
+  console.log('🚀 ~ LeetCode ~ profileData:', profileData)
 
   if (profileData.isLoading) return <div>Loading...</div>
   if (profileData.isError) return <div>Error...</div>
@@ -10,10 +11,10 @@ const LeetCode = () => {
     <div>
       <Avatar
         className="w-32 h-32 rounded-full"
-        url={profileData.profile.userAvatar}
+        url={profileData?.profile?.userAvatar}
         alt="leetCode Avatar Profile"
-        desc={profileData.profile.aboutMe}
-        userName={profileData.userName}
+        desc={profileData?.profile?.aboutMe}
+        userName={profileData.username}
       />
     </div>
   )
