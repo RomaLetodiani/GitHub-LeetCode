@@ -1,6 +1,35 @@
 import { useQuery } from '@tanstack/react-query'
 import { useLocation } from 'react-router-dom'
-import { fetchProfileData } from '../pages/Home/Home'
+import { LeetcodeUser } from '../Types/LeetcodeTypes'
+import { GitHubProfile } from '../Types/GitHubTypes'
+
+const initialProfileData: Partial<LeetcodeUser & GitHubProfile> = {
+  avatarUrl: '',
+  bio: '',
+  company: '',
+  contributionsCollection: {
+    contributionCalendar: {
+      totalContributions: 0,
+    },
+  },
+  email: '',
+  githubUrl: '',
+  linkedinUrl: '',
+  location: '',
+  repositories: {
+    totalCount: 0,
+  },
+  twitterUrl: '',
+  twitterUsername: '',
+  username: '',
+  websiteUrl: '',
+  profile: {
+    aboutMe: '',
+    location: '',
+    realName: '',
+    userAvatar: '',
+  },
+}
 
 export const useDataQuery = () => {
   const { pathname } = useLocation()
@@ -9,10 +38,16 @@ export const useDataQuery = () => {
     data: profileData,
     isLoading,
     isError,
+    error,
   } = useQuery({
     queryKey: [`${pathname}-profile`, userNameInput],
-    queryFn: () => fetchProfileData(pathname, userNameInput as string),
+    queryFn: (): Partial<LeetcodeUser & GitHubProfile> => profileData ?? initialProfileData,
+    // queryFn: () => fetchProfileData(pathname, userNameInput as string),
+    enabled: !!userNameInput,
   })
 
-  return { ...profileData, userName: userNameInput, isLoading, isError }
+  if (!profileData)
+    return { ...initialProfileData, userName: userNameInput, isLoading, isError, error }
+
+  return { ...profileData, userName: userNameInput, isLoading, isError, error }
 }
