@@ -1,9 +1,9 @@
 type avatarProps = {
-  url: string
-  alt: string
+  url?: string
+  alt?: string
   className: string
-  userName: string
-  desc: string
+  userName?: string
+  desc?: string
 }
 
 const Avatar = ({ url, alt, className, userName, desc }: avatarProps) => {
