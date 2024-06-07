@@ -38,7 +38,6 @@ export const useDataQuery = () => {
     data: profileData,
     isLoading,
     isError,
-    error,
   } = useQuery({
     queryKey: [`${pathname}-profile`, userNameInput],
     queryFn: (): Partial<LeetcodeUser & GitHubProfile> => profileData ?? initialProfileData,
@@ -46,8 +45,7 @@ export const useDataQuery = () => {
     enabled: !!userNameInput,
   })
 
-  if (!profileData)
-    return { ...initialProfileData, userName: userNameInput, isLoading, isError, error }
+  if (!profileData) return { ...initialProfileData, userName: userNameInput, isLoading, isError }
 
-  return { ...profileData, userName: userNameInput, isLoading, isError, error }
+  return { ...profileData, userName: userNameInput, isLoading, isError }
 }

@@ -3,12 +3,11 @@ import { useDataQuery } from '../../hooks/useDataQuery'
 
 const GitHub = () => {
   const profileData = useDataQuery()
-
-  if (profileData.isLoading) return <div>Loading...</div>
-  if (profileData.isError) return <div>Error...</div>
   return (
     <div>
       <Avatar
+        loading={profileData.isLoading}
+        isError={profileData.isError}
         className="w-32 h-32 rounded-full"
         url={profileData.avatarUrl}
         alt="GitHub Avatar Profile"

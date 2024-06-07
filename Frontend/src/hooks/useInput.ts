@@ -63,33 +63,3 @@ export const useInput = (
     hasError,
   }
 }
-
-// Example usage
-// Email Input
-// const {
-//     value: emailValue,
-//     focus: emailFocus,
-//     hasError: emailHasError,
-//     onChange: emailOnChange,
-//     onBlur: emailOnBlur,
-//     onFocus: emailOnFocus,
-//   } = useInput((email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email));
-
-// Phone Input
-//   const {
-//     value: phoneValue,
-//     focus: phoneFocus,
-//     hasError: phoneHasError,
-//     onChange: phoneOnChange,
-//     onBlur: phoneOnBlur,
-//     onFocus: phoneOnFocus,
-//   } = useInput((phone: string) => {
-//     const phoneRegex = /^(\+\d{3}\s?)?\(?[\s.-]?\d{3}\)?[\s.-]?\d{2}[\s.-]?\d{2}[\s.-]?\d{2}$/;
-//     const phoneRegexVol2 = /^(\+\d{3}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{3}$/;
-//     const sanitizedPhone = phone.replace(/[-\s]/g, '');
-//     const shortPhoneRegex = /^\d{9}$/;
-
-//     return (
-//       phoneRegex.test(phone) || phoneRegexVol2.test(phone) || shortPhoneRegex.test(sanitizedPhone)
-//     );
-//   });

@@ -3,7 +3,6 @@ import { useDataQuery } from '../../hooks/useDataQuery'
 
 const LeetCode = () => {
   const profileData = useDataQuery()
-  console.log('🚀 ~ LeetCode ~ profileData:', profileData)
 
   if (profileData.isLoading) return <div>Loading...</div>
   if (profileData.isError) return <div>Error...</div>
