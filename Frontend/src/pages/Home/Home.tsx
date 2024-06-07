@@ -8,6 +8,9 @@ import { useInput } from '../../hooks/useInput'
 import Button from '../../components/UI/Button'
 import { gitHubServices, leetCodeServices } from '../../services'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const transitionVariants = (dimensions: { height: number; width: number }) => ({
   open: {
     clipPath: `circle(${dimensions.height * 3}px at 0px 0px)`,
@@ -35,19 +38,28 @@ enum Page {
 }
 
 export const fetchProfileData = async (page: Page, userName: string) => {
-  console.log('🚀 ~ fetchProfileData ~ userName:', userName)
   if (!userName) {
     return
   }
   switch (page) {
     case '/github':
-      return await gitHubServices.getProfile({ userName }).then(({ data }) => {
-        return data
-      })
+      return await gitHubServices
+        .getProfile({ userName })
+        .then(({ data }) => {
+          return data
+        })
+        .catch((error) => {
+          throw new Error(error)
+        })
     case '/leetcode':
-      return await leetCodeServices.getProfile({ userName }).then(({ data }) => {
-        return data
-      })
+      return await leetCodeServices
+        .getProfile({ userName })
+        .then(({ data }) => {
+          return data
+        })
+        .catch((error) => {
+          throw new Error(error)
+        })
   }
 }
 
@@ -63,6 +75,10 @@ const Home = () => {
     mutationFn: () => fetchProfileData(pathname as Page, userNameInput.value),
     onSuccess: (data) => {
       queryClient.setQueryData([`${pathname}-profile`, userNameInput.value], data)
+    },
+    onError: () => {
+      toast.error('User not found!')
+      queryClient.setQueryData(['errorProfile'], true)
     },
   })
   useEffect(() => {
@@ -87,7 +103,7 @@ const Home = () => {
         className="fixed -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-full h-full bg-leetcode-gradient"
         variants={transitionVariants(dimensions)}
       />
-
+      <ToastContainer />
       <Card>
         <Input placeholder={`${isLeetCode ? 'LeetCode' : 'GitHub'} Username`} {...userNameInput} />
         <Outlet />
