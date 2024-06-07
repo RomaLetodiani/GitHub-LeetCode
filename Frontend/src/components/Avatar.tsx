@@ -29,7 +29,7 @@ const Avatar = ({
   }
 
   const { data: errorProfile } = useQuery({ queryKey: ['errorProfile'] })
-  console.log('🚀 ~ errorProfile:', errorProfile)
+  console.log('🚀 ~ errorProfile, isError:', errorProfile, isError)
   return (
     <div>
       <img src={url} alt={alt} className={className} />

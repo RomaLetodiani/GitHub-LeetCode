@@ -1,5 +1,5 @@
 # compiled output
-# /dist
+# /dist is where the compiled app is output, commentted out to host on vercel
 /node_modules
 
 # Environments
